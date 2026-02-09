@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenfox Cafe - Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2e8b57;
+            --light-green: #d4f1d4;
+            --accent-green: #3cb371;
+            --dark-green: #1d5c3d;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --text-dark: #333333;
+            --text-light: #555555;
+            --shadow: rgba(46, 139, 87, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+        width: 150px;
+        height: 120px;
+            color: var(--primary-green);
+            font-size: 2.5rem;
+        }
+
+        .logo-text h1 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .location-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .location-info i {
+            color: var(--primary-green);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary-green);
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--dark-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)), 
+                        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 25px;
+            color: var(--text-light);
+        }
+
+        /* Menu Categories */
+        .category-title {
+            text-align: center;
+            margin: 50px 0 30px;
+            position: relative;
+        }
+
+        .category-title h2 {
+            display: inline-block;
+            background-color: var(--white);
+            padding: 0 20px;
+            color: var(--primary-green);
+            font-size: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-title:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--light-green);
+            z-index: 0;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .menu-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(46, 139, 87, 0.2);
+        }
+
+        .menu-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .menu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover .menu-image img {
+            transform: scale(1.05);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            background-color: #f5f5f5;
+        }
+
+        .image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+
+        .menu-card-header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-card-header h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .menu-price {
+            background-color: var(--white);
+            color: var(--primary-green);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .menu-card-body {
+            padding: 20px;
+        }
+
+        .menu-card-body p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .menu-ingredients {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .special-badge {
+            display: inline-block;
+            background-color: var(--light-green);
+            color: var(--dark-green);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Drinks Section */
+        .drinks-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .drink-item {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            width: 200px;
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .drink-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(46, 139, 87, 0.2);
+        }
+
+        .drink-image {
+            height: 120px;
+            background-color: #e0f7e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .drink-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .drink-content {
+            padding: 20px 15px;
+            text-align: center;
+        }
+
+        .drink-number {
+            background-color: var(--light-green);
+            color: var(--primary-green);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 auto 15px;
+        }
+
+        .drink-name {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .drink-price {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-green);
+        }
+
+        .footer-section p {
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent-green);
+            transform: translateY(-3px);
+        }
+
+        .map-placeholder {
+            background-color: rgba(255, 255, 255, 0.1);
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .map-placeholder i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-green);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-links a {
+                padding: 6px 12px;
+                font-size: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .drink-item {
+                width: 160px;
+            }
+            
+            .drink-image {
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img class="logo-icon" src="logo/logo.jpg" alt="">
+                <div class="logo-text">
+                    <h1>Greenfox Cafe</h1>
+                    <p>Fresh Ingredients, Authentic Flavors</p>
+                </div>
+            </div>
+            <div class="location-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Lokasi: Barat</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#drinks" class="active">Minuman</a></li>
+                <li><a href="#asian-menu">Menu Asian</a></li>
+                <li><a href="#specialties">Spesial</a></li>
+                <li><a href="#appetizers">Appetizers</a></li>
+                <li><a href="#seafood">Seafood</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2 class="fade-in">Selamat Datang di Greenfox Cafe</h2>
+            <p class="fade-in">Nikmati berbagai pilihan minuman dan makanan lezat dengan bahan-bahan segar dan cita rasa autentik. Setiap hidangan kami dibuat dengan penuh perhatian untuk memastikan pengalaman kuliner terbaik.</p>
+        </div>
+    </section>
+
+    <!-- Drinks Section -->
+    <section id="drinks" class="container">
+        <div class="category-title">
+            <h2>Minuman</h2>
+        </div>
+        
+        <div class="drinks-container">
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1497534446932-c925b458314e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Greenfox Calamansi">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">1</div>
+                    <div class="drink-name">GREENFOX CALAMANSI</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Red Dragon">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">2</div>
+                    <div class="drink-name">RED DRAGON</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Healthy Green">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">3</div>
+                    <div class="drink-name">HEALTHY GREEN</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Virgin Mojito">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">4</div>
+                    <div class="drink-name">VIRGIN MOJITO</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1578164253956-5d5c04f1477c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Peach Frozen">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">5</div>
+                    <div class="drink-name">PEACH FROZEN</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Green Apple Mojito">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">6</div>
+                    <div class="drink-name">GREEN APPLE MOJITO</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ice Klepon">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">7</div>
+                    <div class="drink-name">ICE KLEPON</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Matcha Lemonade">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">8</div>
+                    <div class="drink-name">MATCHA LEMONADE</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+            <div class="drink-item fade-in">
+                <div class="drink-image">
+                    <img src="https://images.unsplash.com/photo-1587734195503-904137cec4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Coffee Lemonade">
+                </div>
+                <div class="drink-content">
+                    <div class="drink-number">9</div>
+                    <div class="drink-name">COFFEE LEMONADE</div>
+                    <div class="drink-price">37K</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Asian Menu Section -->
+    <section id="asian-menu" class="container">
+        <div class="category-title">
+            <h2>NEW MENU ASIAN</h2>
+        </div>
+        
+        <div class="menu-grid">
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Nasi Kapau with Tunjang">
+                </div>
+                <div class="menu-card-header">
+                    <h3>NASI KAPAU WITH TUNJANG</h3>
+                    <div class="menu-price">55K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Steamed rice served with tender beef tendon in spicy curry and crispy fried egg (telur barendo), complemented by traditional kopu vegetables and sambal</p>
+                    <div class="special-badge">NEW</div>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Iga Panggang">
+                </div>
+                <div class="menu-card-header">
+                    <h3>IGA PANGGANG SERVED WITH RICE</h3>
+                    <div class="menu-price">89K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Tender grilled beef ribs marinated in rich spices, served with steamed rice</p>
+                    <div class="special-badge">NEW</div>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Savory Saikoro">
+                </div>
+                <div class="menu-card-header">
+                    <h3>SAVORY SAIKORO</h3>
+                    <div class="menu-price">59K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Juicy, pan-seared saikoro beef cubes served with mustofa potato, steamed rice and crispy fried kailan for a satisfying bite</p>
+                    <div class="special-badge">NEW</div>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Nasi Empal with Kailan Crispy">
+                </div>
+                <div class="menu-card-header">
+                    <h3>NASI EMPAL WITH KAILAN CRISPY</h3>
+                    <div class="menu-price">59K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Flavorful shredded beef (empal) served with my favorite kopu vegetables and crispy fried kailan</p>
+                    <div class="special-badge">NEW</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section -->
+    <section id="specialties" class="container">
+        <div class="category-title">
+            <h2>Spesial Greenfox</h2>
+        </div>
+        
+        <div class="menu-grid">
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Wagyu Brazilian Churrasco">
+                </div>
+                <div class="menu-card-header">
+                    <h3>WAGYU BRAZILIAN CHURASCO</h3>
+                    <div class="menu-price">89K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Grilled wagyu beef, green onion, and paprika, served in skewer style</p>
+                    <div class="special-badge">SPESIAL</div>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Green Fox Burger">
+                </div>
+                <div class="menu-card-header">
+                    <h3>GREEN FOX BURGER</h3>
+                    <div class="menu-price">79K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Beef patty with cheese, caramelized onion, pickles, served with french fries</p>
+                    <div class="special-badge">SPESIAL</div>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Prawn Popcorn Hotdog">
+                </div>
+                <div class="menu-card-header">
+                    <h3>PRAWN POPCORN HOTDOG</h3>
+                    <div class="menu-price">79K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Hotdog bun with prawn popcorn, mayonnaise, cabbage salad, and french fries</p>
+                    <div class="special-badge">SPESIAL</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appetizers Section -->
+    <section id="appetizers" class="container">
+        <div class="category-title">
+            <h2>Appetizers</h2>
+        </div>
+        
+        <div class="menu-grid">
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1625937286074-9ca519e5b5d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Gorengan Platter">
+                </div>
+                <div class="menu-card-header">
+                    <h3>GORENGAN PLATTER</h3>
+                    <div class="menu-price">29K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Gorengan Platter with Sambal Kecap</p>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Siomay Bandung">
+                </div>
+                <div class="menu-card-header">
+                    <h3>SIOMAY BANDUNG</h3>
+                    <div class="menu-price">35K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Siomay Bandung</p>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Chicken Yakitori">
+                </div>
+                <div class="menu-card-header">
+                    <h3>CHICKEN YAKITORI (5 PCS)</h3>
+                    <div class="menu-price">45K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Japanese Chicken Skewer with sambal</p>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Beef Yakitori">
+                </div>
+                <div class="menu-card-header">
+                    <h3>BEEF YAKITORI (4 PCS)</h3>
+                    <div class="menu-price">49K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Japanese Beef Skewer with Sambal</p>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1641730819868-0eec9a40314d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Crispy Chicken Skin">
+                </div>
+                <div class="menu-card-header">
+                    <h3>CRISPY CHICKEN SKIN (5 PCS)</h3>
+                    <div class="menu-price">32K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Crispy chicken skin Skewer with Sambal</p>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Onion Flower">
+                </div>
+                <div class="menu-card-header">
+                    <h3>ONION FLOWER</h3>
+                    <div class="menu-price">38K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Fried Onion with Sriracha Mayo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seafood Section -->
+    <section id="seafood" class="container">
+        <div class="category-title">
+            <h2>Seafood</h2>
+        </div>
+        
+        <div class="menu-grid">
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Udang Bakar Madu">
+                </div>
+                <div class="menu-card-header">
+                    <h3>UDANG BAKAR MADU</h3>
+                    <div class="menu-price">129K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Grilled prawns with honey glaze</p>
+                    <div class="special-badge">PREMIUM</div>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Glass Noodle Prawn">
+                </div>
+                <div class="menu-card-header">
+                    <h3>GLASS NOODLE PRAWN</h3>
+                    <div class="menu-price">89K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Glass Noodle served with prawn, shitake, shallot and Garlic</p>
+                </div>
+            </div>
+            
+            <div class="menu-card fade-in">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cumi Bakar">
+                </div>
+                <div class="menu-card-header">
+                    <h3>CUMI BAKAR</h3>
+                    <div class="menu-price">129K</div>
+                </div>
+                <div class="menu-card-body">
+                    <p>Grilled squid with special sauce</p>
+                    <div class="special-badge">PREMIUM</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Greenfox Cafe</h3>
+                    <p>Menawarkan pengalaman kuliner yang tak terlupakan dengan bahan-bahan segar dan cita rasa autentik.</p>
+                    <div class="contact-info">
+                        <i class="fas fa-clock"></i>
+                        <span>Buka Setiap Hari: 10:00 - 22:00</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Lokasi: Barat</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Lokasi Kami</h3>
+                    <p>Kunjungi Greenfox Cafe di lokasi barat untuk menikmati hidangan terbaik kami.</p>
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Lokasi: Barat</p>
+                        <p>Maps: Greenfox Cafe Barat</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Kategori Menu</h3>
+                    <p><a href="#drinks" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Minuman</a></p>
+                    <p><a href="#asian-menu" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Menu Asian</a></p>
+                    <p><a href="#specialties" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Spesial</a></p>
+                    <p><a href="#appetizers" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Appetizers</a></p>
+                    <p><a href="#seafood" style="color: rgba(255, 255, 255, 0.8); text-decoration: none;">Seafood</a></p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Greenfox Cafe. All rights reserved. | Gambar diambil: Sep 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animasi untuk elemen saat scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animasi fade-in untuk elemen saat scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            };
+            
+            // Set initial state
+            fadeElements.forEach(element => {
+                element.style.opacity = "0";
+                element.style.transform = "translateY(30px)";
+                element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            });
+            
+            // Check on load
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+            
+            // Smooth scrolling untuk navigasi
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Update active nav link
+                    document.querySelectorAll('nav a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Highlight nav link berdasarkan posisi scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('nav a');
+                
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
